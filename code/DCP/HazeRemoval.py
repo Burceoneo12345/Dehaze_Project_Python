@@ -69,11 +69,12 @@ def dehaze(path, output=None):
 
 
 if __name__ == '__main__':
+    """
     with open(pic_dir + "test_list.txt") as f:
         contents = f.readlines()
         haze_names = [i.strip() for i in contents]
-    # print(haze_names[0].split('_')[0]+".jpg")
     for pic_name in haze_names:
         out_name = pic_name.split('_')[0]+".jpg"
         dehaze(pic_dir + "haze/" + pic_name, pic_dir + "result/" + out_name)
-    # dehaze(path, 'output.jpg')
+    """
+    dehaze('cones.jpg', 'output.jpg')
