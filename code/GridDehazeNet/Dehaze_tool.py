@@ -83,18 +83,8 @@ if __name__ == '__main__':
 
     # --- Use the evaluation model in testing --- #
     net.eval()
-    """
-    test_pic_name = '1933_0.8_0.2'
-    haze_pic = get_images(test_pic_name + '.jpg').unsqueeze(dim=0)
-    print(haze_pic.size())
-    haze = haze_pic.to(device)
-    dehaze = net(haze)
-    dehaze_images = torch.split(dehaze, 1, dim=0)
-    utils.save_image(dehaze_images, './test/{}'.format('Dehaze_' + test_pic_name + '.png'))
-    """
     print('--- Testing starts! ---')
     start_time = time.time()
     dehaze(net, test_data_loader, device, save_tag=True)
-    # val_psnr, val_ssim = validation(net, val_data_loader, device, category, save_tag=True)
     end_time = time.time() - start_time
     print('validation time is {0:.4f}'.format(end_time))

@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+pic_dir = "./images/"
 
 def dark_channel(img, size=15):
     r, g, b = cv2.split(img)
@@ -55,30 +56,24 @@ def dehaze(path, output=None):
     img_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY).astype('float64') / 255
     atom = get_atmo(img)
     trans = get_trans(img, atom)
-    # cv2.imwrite("trans_canon.jpg", trans * 255)
     trans_guided = guided_filter(trans, img_gray, 15, 0.0001)
-    # cv2.imwrite("trans_guided_canon.jpg", trans_guided * 255)
     trans_guided = cv2.max(trans_guided, 0.25)
-    trans = cv2.max(trans, 0.25)
     result = np.empty_like(img)
-    # result_1 = np.empty_like(img)
     for i in range(3):
         result[:, :, i] = (img[:, :, i] - atom) / trans_guided + atom
-        #  result_1[:, :, i] = (img[:, :, i] - atom) / trans + atom
-    # cv2.imwrite("pic_dard1.jpg", dark_channel(img, 15) * 255)
-    # cv2.imwrite("result_no_guided.jpg", result_1 * 255)
-    cv2.imshow("source", img)
-    cv2.imshow("result", result)
+    # cv2.imshow("source", img)
+    # cv2.imshow("result", result)
     cv2.waitKey()
     if output is not None:
         cv2.imwrite(output, result * 255)
 
 
 if __name__ == '__main__':
-    path_1 = 'images/fog_1.jpg'
-    path_2 = 'canon.jpg'
-    path_3 = 'fog_2.jpeg'
-    path_4 = 'girls.jpg'
-    path_6 = 'input.png'
-    path_5 = 'images/my_pic.jpg'
-    dehaze(path_6, 'output.jpg')
+    with open(pic_dir + "test_list.txt") as f:
+        contents = f.readlines()
+        haze_names = [i.strip() for i in contents]
+    # print(haze_names[0].split('_')[0]+".jpg")
+    for pic_name in haze_names:
+        out_name = pic_name.split('_')[0]+".jpg"
+        dehaze(pic_dir + "haze/" + pic_name, pic_dir + "result/" + out_name)
+    # dehaze(path, 'output.jpg')

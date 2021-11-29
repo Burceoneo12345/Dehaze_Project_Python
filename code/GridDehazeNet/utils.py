@@ -41,9 +41,11 @@ def dehaze(net, test_data_loader, device, save_tag=True):
         with torch.no_grad():
             haze_pic, image_name = test_data
             haze_pic = haze_pic.to(device)
+            name = image_name[0].split("_")
+            name = name[0]+".jpg"
             dehaze_pic = net(haze_pic)
             if save_tag:
-                utils.save_image(dehaze_pic, './test/result/Dehaze_{}'.format(image_name[0]))
+                utils.save_image(dehaze_pic, './test/result/{}'.format(name))
 
 
 def validation(net, val_data_loader, device, category, save_tag=False):
