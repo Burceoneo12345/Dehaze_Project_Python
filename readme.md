@@ -10,8 +10,8 @@ This repo contains the codes and papers for haze removal.
 * run ```./code/DCP/HazeRemoval.py``` to remove the haze from picture by DCP
   * change ```./code/DCP/images/test_list.txt``` and add the hazy images in the folder```./code/DCP/images/haze```
 * run ```./code/GridDehazeNet/Dehaze_tool.py``` to remove the haze from picture by GridDehazeNet. The Original Code is [here](https://github.com/proteus1991/GridDehazeNet)
-* run ```./code/DehazeNet-caffe/DehazeNet.py``` to remove the haze from picture by DehazeNet.
   * change ```./code/GridDehazeNet/test/test_list.txt``` and add the hazy images in the folder```./code/GridDehazeNet/test/haze```
+* run ```./code/DehazeNet-caffe/DehazeNet.py``` to remove the haze from picture by DehazeNet.
 * The ```./doc/``` folder stores the paper of DCP、DehazeNet and GridDehazeNet.
 
 
